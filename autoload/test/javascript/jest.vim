@@ -15,7 +15,7 @@ function! test#javascript#jest#build_position(type, position) abort
     endif
     return ['--no-coverage', name, '--', a:position['file']]
   elseif a:type ==# 'file'
-    return ['--no-coverage', '--', a:position['file']]
+    return ['--', a:position['file']]
   else
     return []
   endif
