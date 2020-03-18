@@ -23,12 +23,17 @@ endfunction
 
 let s:yarn_command = '\<yarn\>'
 function! test#javascript#jest#build_args(args) abort
+  let args = a:args
   if exists('g:test#javascript#jest#executable')
     \ && g:test#javascript#jest#executable =~# s:yarn_command
-    return filter(a:args, 'v:val != "--"')
-  else
-    return a:args
+    let args = filter(a:args, 'v:val != "--"')
   endif
+
+  if !get(g:, 'test#javascript#jest#cache', 1)
+    call insert(args, '--no-cache')
+  endif
+
+  return args
 endfunction
 
 function! test#javascript#jest#executable() abort
