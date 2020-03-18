@@ -33,6 +33,10 @@ function! test#javascript#jest#build_args(args) abort
     call insert(args, '--no-cache')
   endif
 
+  if get(g:, 'test#javascript#jest#coverage', 1)
+    call insert(args, '--coverage')
+  endif
+
   if get(g:, 'test#javascript#jest#project', 0)
     let config = findfile('jest.config.js', '.;')
     if len(config)
