@@ -82,7 +82,7 @@ function! test#execute(runner, args, ...) abort
 
   let executable = test#base#executable(a:runner)
   let args = test#base#build_args(a:runner, args)
-  let cmd = [executable] + args
+  let cmd = test#base#prefix(a:runner) + [executable] + args
   call filter(cmd, '!empty(v:val)')
 
   call test#shell(join(cmd), strategy)

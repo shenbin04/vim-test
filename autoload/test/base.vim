@@ -22,6 +22,10 @@ function! test#base#options(runner, args, ...) abort
   endif
 endfunction
 
+function! test#base#prefix(runner) abort
+  return get(g:, 'test#'.a:runner.'#prefix', [])
+endfunction
+
 function! test#base#executable(runner) abort
   if exists('g:test#'.a:runner.'#executable')
     return g:test#{a:runner}#executable
