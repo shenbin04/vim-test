@@ -33,6 +33,13 @@ function! test#javascript#jest#build_args(args) abort
     call insert(args, '--no-cache')
   endif
 
+  if get(g:, 'test#javascript#jest#project', 0)
+    let config = findfile('jest.config.js', '.;')
+    if len(config)
+      let args = ['--projects', fnamemodify(config, ':.:h')] + args
+    endif
+  endif
+
   return args
 endfunction
 
