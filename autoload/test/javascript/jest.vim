@@ -23,7 +23,7 @@ endfunction
 
 let s:yarn_command = '\<yarn\>'
 function! test#javascript#jest#build_args(args) abort
-  let args = a:args
+  let args = get(g:, 'test#javascript#jest#options', []) + a:args
   if exists('g:test#javascript#jest#executable')
     \ && g:test#javascript#jest#executable =~# s:yarn_command
     let args = filter(a:args, 'v:val != "--"')
